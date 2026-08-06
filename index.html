@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дневник Богатства — ваш ежедневный помощник для работы с деньгами</title>
+<meta name="description" content="Печатный дневник на 365 дней: финансовые цели, привычки, еженедельный план и трекеры. Авторская методика Татьяны Волковой.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:        #0E141B;
+    --navy-card:   #272F3F;
+    --navy-card-2: #1B222E;
+    --navy-text:   #364259;
+    --cream:       #F0F2F0;
+    --cream-2:     #E7E9E5;
+    --gold:        #A9A975;
+    --gold-dark:   #8E8E5A;
+    --white:       #FFFFFF;
+    --muted-dark:  rgba(255,255,255,.68);
+    --muted-light: rgba(54,66,89,.68);
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans:  'Lato', -apple-system, Segoe UI, sans-serif;
+    --ogr-padding: 40px;
+  }
+  .ogr{
+    padding-top: var(--ogr-padding) !important;
+    padding-bottom: var(--ogr-padding) !important;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans);
+    background:var(--cream);
+    color:var(--navy-text);
+    -webkit-font-smoothing:antialiased;
+    text-wrap:pretty;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  section{position:relative}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  .dark{background:var(--navy);color:var(--white)}
+  .dark .muted{color:var(--muted-dark)}
+  .light{background:var(--cream)}
+  .light .muted{color:var(--muted-light)}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:.005em}
+  .dark h1, .dark h2, .dark h3{color:var(--white)}
+  em, i{font-style:italic}
+  .accent{color:var(--gold);font-style:italic;font-weight:600}
+
+  .eyebrow{
+    font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);
+  }
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 28px;border-radius:999px;
+    background:linear-gradient(100deg, var(--gold-dark), var(--gold) 60%, #b6b686);
+    color:#1a1d10;font-weight:600;font-size:15px;
+    border:none;cursor:pointer;white-space:nowrap;
+    box-shadow:0 8px 24px rgba(169,169,117,.25);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(169,169,117,.35)}
+  .btn svg{width:16px;height:16px;flex:none}
+
+  /* ============ ORDER MODAL (GetCourse widget) ============ */
+  .order-modal{
+    position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .order-modal.active{display:flex}
+  .order-modal-backdrop{position:absolute;inset:0;background:rgba(14,20,27,.72);backdrop-filter:blur(3px)}
+  .order-modal-content{
+    position:relative;background:#fff;border-radius:20px;max-width:480px;width:100%;
+    max-height:90vh;overflow-y:auto;padding:56px 12px 12px;
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+  }
+  .order-modal-close{
+    position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:999px;
+    background:var(--navy);color:#fff;border:none;font-size:20px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;z-index:1;
+  }
+  /* The fincontour widget reserves blank space above its own title —
+     crop it by shifting the iframe up inside an overflow:hidden wrapper.
+     No max-height on the iframe itself: it hard-clips content (iframes
+     don't scroll their own overflow here), so let it render full height
+     and let .order-modal-content scroll instead. */
+  #order-widget-container{overflow:hidden}
+  #order-widget-container iframe{margin-top:-72px}
+  body.modal-open{overflow:hidden}
+  @media (max-width:600px){
+    .order-modal{padding:0}
+    .order-modal-content{
+      width:100%;max-width:100%;height:100%;max-height:100dvh;
+      border-radius:0;padding:56px 4px 24px;
+    }
+  }
+  @media (min-width:901px){
+    .order-modal-content{max-width:760px;max-height:82vh}
+  }
+
+  .card{
+    background:var(--navy-card);
+    border-radius:14px;
+    padding:20px 24px;
+  }
+  .light .card{
+    background:#FAFAF8;
+    border:1px solid rgba(54,66,89,.1);
+  }
+
+  .arc-decor{position:absolute;pointer-events:none;opacity:.55}
+
+  /* ============ HEADER ============ */
+  header.site-header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,20,27,.95);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .site-header .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--serif);font-weight:700;font-size:16px;letter-spacing:.04em;
+    color:var(--gold);text-transform:uppercase;
+  }
+  .logo-icon{width:24px;height:24px;flex:none}
+  .nav-links{display:flex;gap:36px}
+  .nav-links a{font-size:14px;color:var(--muted-dark);transition:color .15s}
+  .nav-links a:hover{color:var(--white)}
+  .header-cta{font-size:14px;padding:12px 22px}
+  .menu-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:26px;height:26px;background:none;border:none;padding:0;cursor:pointer}
+  .menu-burger span{display:block;width:100%;height:2px;background:var(--gold);border-radius:2px}
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .header-cta{display:none !important}
+    .menu-burger{display:flex}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height:calc(100vh - 73px); padding:0; overflow:hidden;
+    display:flex; align-items:center; isolation:isolate;
+  }
+  .hero .wrap{
+    width:100%;
+  }
+  .hero-content{position:relative; z-index:1; max-width:570px; padding:72px 0}
+  .hero h1{font-size:clamp(38px,4.4vw,58px);color:var(--gold);text-transform:uppercase;margin-bottom:22px}
+  .hero-sub{font-size:18px;color:var(--white);margin-bottom:20px}
+  .hero .card{margin-bottom:28px}
+  .hero .card p{font-size:15px;line-height:1.6;color:var(--muted-dark)}
+  .hero .card b{color:var(--white);font-weight:600}
+  .hero .card .accent{font-weight:600}
+  .price-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;flex-wrap:nowrap}
+  .price-label{font-size:14px;color:var(--muted-dark);line-height:1.25}
+  .price-old{
+    background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.06);
+    border-radius:999px;padding:7px 18px;font-size:16px;color:rgba(255,255,255,.5);
+    text-decoration:line-through;white-space:nowrap;font-style:italic;
+  }
+  .price-new{font-family:var(--serif);font-style:italic;font-size:36px;color:var(--white);font-weight:600;white-space:nowrap}
+  .price-note{font-size:13.5px;font-style:italic;color:var(--gold);margin-top:18px;margin-bottom:26px;opacity:.9}
+  .hero-media{position:absolute;inset:0;z-index:-2}
+  .hero-media::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(90deg, rgba(14,20,27,.85) 0%, rgba(14,20,27,.55) 32%, rgba(14,20,27,0) 62%);
+  }
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:right center;display:block}
+  
+  .hero-book-col{display:none}
+
+  @media (max-width:860px){
+    .hero{min-height:0;padding:0}
+    .hero .wrap{display:block}
+    .hero-media{display:none}
+    .hero-content{padding:0;max-width:none}
+    .hero-top-row{
+      position:relative;margin-bottom:28px;
+    }
+    .hero-text-col{position:relative;z-index:2;width:100%;max-width:100%}
+    .hero h1{font-size:clamp(48px,12.5vw,62px);line-height:0.98;margin-bottom:14px;letter-spacing:-.02em}
+    .hero-sub{font-size:18px;line-height:1.35;margin-bottom:0;color:var(--white);max-width:270px}
+    .hero-book-col{
+      display:block;position:absolute;right:-105px;top:-28px;z-index:1;
+      width:360px;pointer-events:none;opacity:.72;
+    }
+    .hero-book-col img{
+      width:100%;height:auto;display:block;
+      filter:drop-shadow(-10px 20px 40px rgba(0,0,0,.7));
+    }
+    .hero .card{position:relative;z-index:2;padding:22px 20px;border-radius:16px;margin-bottom:26px}
+    .hero .card p{font-size:15px;line-height:1.55}
+    .price-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:8px;margin-bottom:12px;width:100%}
+    .price-label{font-size:13px;line-height:1.2;flex:0 0 auto}
+    .price-old{padding:6px 12px;font-size:14.5px;flex:0 0 auto}
+    .price-new{font-size:30px;flex:0 0 auto}
+    .price-note{font-size:13.5px;margin-top:18px;margin-bottom:26px}
+    .hero-btn{display:flex;width:100%;justify-content:center;text-align:center;padding:16px 24px;font-size:16px}
+  }
+
+  /* ============ PAIN CHECKLIST ============ */
+  .pain{padding:48px 0;overflow:hidden}
+  @media (max-width:900px){
+    .pain{padding:24px 0 0 !important;overflow:hidden}
+    .pain .wrap{padding:0 18px !important;gap:0 !important}
+    .pain h2{margin-top:8px;font-size:clamp(26px,6.8vw,36px);margin-bottom:12px}
+    .pain-sub{margin-bottom:12px}
+    .pain-grid{gap:10px;margin-bottom:14px}
+    .pain-card{padding:14px;font-size:13.5px}
+    .pain-callout{padding:16px 18px;font-size:14px}
+    .pain-media{
+      overflow:hidden;
+      border-radius:0;
+      margin-top:12px;
+      margin-bottom:0;
+      position:relative;
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
+    }
+    .pain-media img{
+      width:200% !important;
+      max-width:none !important;
+      height:auto !important;
+      display:block;
+      margin-left:-88% !important;
+      border-radius:0;
+      transform:none !important;
+    }
+  }
+  .pain .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .pain h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.6vw,56px);line-height:1.08;letter-spacing:-.02em;color:var(--navy-text);margin-bottom:20px}
+  .pain h2 em{color:var(--gold-dark)}
+  .pain-sub{font-size:15px;font-weight:600;color:var(--navy-text);margin-bottom:18px;letter-spacing:.02em}
+  .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+  .pain-card{
+    background:#FAFAF8;border:1px solid rgba(54,66,89,.12);border-radius:12px;
+    padding:18px;font-size:14px;line-height:1.5;
+  }
+  .pain-card .dot{
+    width:24px;height:24px;border-radius:999px;background:var(--navy-text);
+    color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-bottom:12px;
+  }
+  .pain-callout{
+    background:var(--cream-2);border-radius:12px;padding:20px 22px;font-size:14.5px;line-height:1.6;
+  }
+  .pain-callout b{font-weight:700}
+  .pain-media img{width:100%;border-radius:14px}
+
+  /* DESKTOP PAIN BLOCK — DO NOT RESTORE THE TEXT COLUMN.
+     The text remains visible only on screens 900px wide and below. */
+  @media (min-width:901px){
+    .pain{padding:clamp(32px,4vw,56px) 0;display:flex;align-items:center;overflow:hidden}
+    .pain .wrap{display:block;min-height:clamp(700px,55vw,820px);position:relative;width:100%}
+    .pain .wrap > div:first-child{display:none !important}
+    .pain-media{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+    .pain-media img{width:100%;height:100%;object-fit:contain;border-radius:0;transform:scale(1.18)}
+  }
+
+  /* ============ WHY / CONTROL section ============ */
+  .why{padding:48px 0;overflow:hidden}
+  @media (max-width:900px){
+    .why{padding:20px 0 !important}
+    .why h2{font-size:clamp(26px,6.5vw,34px);margin-bottom:16px}
+    .star-list{gap:10px;margin-bottom:16px}
+    .star-list li{font-size:14.5px}
+    .why .card{margin-bottom:16px;padding:12px 16px;font-size:13.5px !important;line-height:1.45}
+    .why-quote{padding:18px 20px;font-size:20px}
+  }
+  .why .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .why h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.6vw,56px);line-height:1.05;letter-spacing:-.02em;margin-bottom:24px}
+  .star-list{display:flex;flex-direction:column;gap:15px;margin-bottom:24px}
+  .star-list li{display:flex;gap:10px;font-size:16px;line-height:1.3;align-items:center}
+  .star-list li::before{
+    content:'';flex:none;width:20px;height:20px;
+    background:url('assets/icon-star.svg') center/contain no-repeat;
+  }
+  .why .card{margin-bottom:20px;background:rgba(129,124,116,.2);border:none;padding:20px 30px;border-radius:15px;font-size:20px;line-height:1.3}
+  .why .card b{font-weight:700}
+  .why-quote{
+    background:#fff;padding:24px 30px;border-radius:0 0 20px 0;max-width:610px;
+    font-family:var(--serif);font-weight:400;font-size:clamp(22px,2.6vw,32px);
+    line-height:1.15;letter-spacing:-.02em;color:var(--navy-text);
+  }
+  .why-quote .accent{font-weight:400;font-style:italic}
+  .why-media img{width:100%;border-radius:14px}
+  @media (min-width:901px){
+    .why .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:6%;align-items:stretch}
+    .why-media{position:relative;min-height:0}
+    .why-media img{position:absolute;top:0;height:100%;width:auto;max-width:none;transform:translateX(10%)}
+  }
+  @media (max-width:900px){
+    .why-media{display:none}
+    .why-quote{position:relative;border-radius:15px;padding-right:56px}
+    .why-quote::after{
+      content:'';position:absolute;top:-16px;right:22px;width:24px;height:34px;
+      background:url('assets/imagine-paperclip.png') center/contain no-repeat;
+    }
+  }
+
+  /* ============ YEAR TOOL (dark) ============ */
+  .yeartool{padding:100px 0;overflow:hidden}
+  @media (max-width:900px){
+    .yeartool{padding:40px 0 12px !important}
+    .yeartool-media{
+      overflow:hidden;
+      border-radius:0;
+      margin-top:24px;
+      margin-bottom:0;
+      position:relative;
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
+    }
+    .yeartool-media img{
+      width:145% !important;
+      max-width:none !important;
+      height:auto !important;
+      display:block;
+      margin-left:10% !important;
+      border-radius:0;
+      transform:none !important;
+    }
+  }
+  .yeartool .wrap{display:grid;grid-template-columns:minmax(0,45%) minmax(0,50%);column-gap:5%;row-gap:28px;align-items:center;position:relative;z-index:2}
+  .yeartool h2{grid-column:1 / -1;font-size:clamp(44px,6vw,76px);text-transform:uppercase;color:var(--gold);margin:0}
+  .yeartool h3{font-size:clamp(22px,2.4vw,28px);color:var(--white);margin-bottom:18px;font-weight:600}
+  .yeartool h3 em{color:var(--gold)}
+  .yeartool .card{margin-bottom:22px;font-size:15px;line-height:1.6}
+  .feature-list{display:flex;flex-direction:column;gap:14px;margin-bottom:26px}
+  .feature-list li{display:flex;gap:12px;font-size:15px;align-items:flex-start;color:var(--white)}
+  .feature-list .ico{
+    flex:none;width:24px;height:24px;
+    background-image:var(--mask);background-position:center;background-size:contain;background-repeat:no-repeat;
+  }
+  .yeartool-quote{
+    border-left:2px solid var(--gold);padding-left:18px;margin-bottom:30px;
+    font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.6;color:var(--muted-dark)
+  }
+  .yeartool-media img{width:100%;border-radius:14px}
+  @media (min-width:901px){
+    .yeartool-media{position:relative}
+    .yeartool-media img{width:130%;max-width:none;transform:translateX(4%)}
+  }
+
+  /* ============ INSIDE (what's inside) ============ */
+  .inside{padding:90px 0;overflow:hidden}
+  .inside .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.8fr);column-gap:6%;row-gap:24px;align-items:start}
+  .inside-head{max-width:640px}
+  .inside-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.6vw,56px);line-height:1.08;letter-spacing:-.02em;margin-bottom:16px}
+  .inside-head p{font-size:15px;line-height:1.6;color:var(--muted-light)}
+  .inside-intro{background:#DADCC3;border-radius:14px;padding:18px 26px;font-size:14px;line-height:1.45;color:var(--navy-text)}
+  .inside-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .inside-card{
+    position:relative;
+    background:#FAFAF8;border:1px solid rgba(54,66,89,.12);border-radius:12px;padding:20px 18px 16px;
+  }
+  .inside-card .dot{
+    position:absolute;top:-10px;left:16px;
+    width:20px;height:20px;margin-bottom:0;
+    background:url('assets/icon-star.svg') center/contain no-repeat;
+    border:none;border-radius:0;display:block;
+  }
+  .inside-card b{display:block;font-size:15px;margin-bottom:4px;color:var(--navy-text)}
+  .inside-card span{font-size:13.5px;color:var(--muted-light)}
+  .inside .card{font-family:var(--serif);font-size:24px;line-height:1.15;padding:26px}
+  .inside .card .accent{font-weight:600}
+  .inside-media{grid-column:2;grid-row:1 / span 4;align-self:center}
+  .inside-media img{width:140%;max-width:none;display:block;transform:translateX(6%)}
+  @media (max-width:900px){
+    .inside{padding:28px 0 !important}
+    .inside .wrap{display:block}
+    .inside-head,.inside-intro,.inside-grid,.inside .card{margin-bottom:18px}
+    .inside-media{
+      grid-column:auto;grid-row:auto;
+      overflow:hidden;
+      margin-top:20px;
+      width:100vw !important;
+      margin-left:calc(50% - 50vw) !important;
+      margin-right:calc(50% - 50vw) !important;
+    }
+    .inside-media img{
+      width:100% !important;
+      max-width:none !important;
+      height:auto !important;
+      display:block;
+      margin-left:0 !important;
+      transform:none !important;
+    }
+  }
+  @media (max-width:560px){ .inside-grid{grid-template-columns:1fr} }
+
+  /* ============ 5 STEPS (dark) ============ */
+  .steps{padding:100px 0}
+  .steps-head{max-width:720px;margin-bottom:44px}
+  .steps-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.4vw,52px);line-height:1.1;letter-spacing:-.02em}
+  .steps-head em{color:var(--gold)}
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .step-card{background:var(--navy-card);border-radius:14px;padding:26px}
+  .step-num{color:var(--gold);font-size:13px;font-weight:700;letter-spacing:.05em;margin-bottom:14px;display:block}
+  .step-card h4{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.3}
+  .step-card p{font-size:14px;line-height:1.6;color:var(--muted-dark)}
+  @media (max-width:900px){
+    .steps{padding:40px 0 !important}
+    .steps-head{margin-bottom:24px}
+    .steps-grid{grid-template-columns:1fr;gap:14px}
+    .step-card{padding:20px}
+    .steps-cta{display:inline-flex;width:100%;justify-content:center;margin-top:24px}
+  }
+
+  /* ============ TODAY VS 365 ============ */
+  .compare{padding:20px 0 100px;overflow:hidden}
+  .compare-book{max-width:1200px;margin:0 auto}
+  .compare-book img{width:100%;height:auto;display:block}
+  .compare-mobile{display:none}
+  @media (max-width:900px){
+    .compare{padding:0 !important;overflow:hidden}
+    .compare-book{display:none}
+    .compare-mobile{
+      display:block;background:var(--navy);color:#fff;
+      padding:40px 18px !important;
+      width:100vw;
+      margin-left:calc(50% - 50vw);
+      margin-right:calc(50% - 50vw);
+    }
+    .compare-mobile h3{
+      font-family:var(--serif);font-weight:400;font-size:clamp(24px,6.5vw,32px);
+      line-height:1.15;letter-spacing:-.02em;color:#fff;margin-bottom:24px;
+    }
+    .compare-mobile h3 em{color:var(--gold);font-style:italic}
+    .compare-label{font-size:14px;font-weight:700;margin-bottom:14px}
+    .compare-list--bad{display:flex;flex-direction:column;gap:10px}
+    .compare-list--bad li{
+      display:flex;align-items:center;gap:12px;font-size:14px;line-height:1.3;
+      border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px 16px;
+    }
+    .x-badge,.check-badge{
+      flex:none;width:22px;height:22px;border-radius:999px;display:flex;align-items:center;
+      justify-content:center;font-size:11px;line-height:1;
+    }
+    .x-badge{background:rgba(255,255,255,.15);color:#fff}
+    .check-badge{background:var(--navy-text);color:#fff}
+    .compare-year{background:var(--cream);color:var(--navy-text);margin:32px -18px -40px;padding:40px 18px 40px}
+    .compare-year h3.compare-365{
+      font-family:var(--serif);font-style:italic;font-weight:400;
+      font-size:clamp(40px,13vw,56px);color:var(--gold) !important;margin-bottom:20px;
+    }
+    .compare-year .compare-label{color:var(--navy-text)}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    .compare-card{
+      border:1px solid rgba(54,66,89,.15);border-radius:12px;padding:16px;
+      font-size:13.5px;line-height:1.35;display:flex;flex-direction:column;gap:10px;color:var(--navy-text);
+    }
+    .compare-card--full{grid-column:1 / -1}
+  }
+
+  /* Shared responsive rules for the large diary visuals. */
+  @media (max-width:900px){
+    .pain,.why,.yeartool,.inside,.compare{overflow:hidden}
+    .why-media img,.yeartool-media img,.inside-media img,.compare-book img{
+      width:100%;height:auto;max-width:100%;transform:none;
+    }
+  }
+
+  /* ============ FOR THOSE WHO WANT ============ */
+  .wantfor{position:relative}
+  /* The photograph owns its height. The overlay card must never stretch it. */
+  .wantfor-media{height:clamp(380px,42vw,560px);overflow:hidden}
+  .wantfor-media img{display:block;width:100%;max-width:none;height:100%;object-fit:cover;object-position:center}
+  .wantfor > .wrap{position:absolute;inset:0;pointer-events:none}
+  .wantfor-card{
+    background:#fff;border-radius:18px;padding:clamp(20px,2vw,26px);
+    max-width:clamp(380px,38vw,450px);
+    margin:0;
+    position:absolute;z-index:2;left:0;top:50%;transform:translateY(-50%);
+    box-shadow:0 30px 60px rgba(0,0,0,.35);
+    display:flex;flex-direction:column;gap:12px;pointer-events:auto;
+  }
+  .wantfor-card h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,2.7vw,34px);line-height:1;letter-spacing:-.04em;margin-bottom:0}
+  .wantfor-card h2 em{color:var(--gold-dark)}
+  .want-list{display:flex;flex-direction:column}
+  .want-list li{
+    display:flex;gap:11px;font-size:clamp(11px,1vw,12.5px);line-height:1.22;align-items:center;color:var(--navy-text);
+    padding:9px 0;border-top:1px solid rgba(54,66,89,.2);
+  }
+  .want-list li:last-child{padding-bottom:0}
+  .want-check{
+    width:19px;height:19px;flex:none;border:1px solid var(--navy-text);
+  }
+  @media (max-width:900px){
+    .wantfor{padding-top:0 !important;padding-bottom:20px !important;background:#10141A !important}
+    .wantfor-media{height:300px;overflow:hidden}
+    .wantfor-media img{width:100%;height:100%;object-fit:cover !important;object-position:85% center !important}
+    .wantfor > .wrap{position:relative !important;inset:auto !important;padding:0 18px !important;pointer-events:auto}
+    .wantfor-card{
+      position:relative !important;
+      inset:auto !important;
+      top:auto !important;
+      bottom:auto !important;
+      transform:none !important;
+      margin-top:-60px !important;
+      left:0 !important;
+      right:0 !important;
+      width:100% !important;
+      max-width:none !important;
+      border-radius:0 !important;
+      padding:24px !important;
+      box-shadow:0 4px 8px rgba(0,0,0,.5);
+    }
+    .wantfor-card::after{
+      content:'';position:absolute;top:-16px;right:26px;width:22px;height:32px;
+      background:url('assets/imagine-paperclip.png') center/contain no-repeat;
+    }
+  }
+  @media (max-width:1400px){
+    .wantfor-media img{object-fit:cover;object-position:center}
+  }
+
+  /* ============ AUTHOR ============ */
+  .author{padding:110px 0 90px;overflow:hidden}
+  .author-head{margin-bottom:44px}
+  .author-eyebrow{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:10px}
+  .author h2{
+    font-family:var(--serif);font-weight:400;text-transform:uppercase;color:var(--gold);
+    font-size:clamp(44px,10vw,120px);line-height:1;letter-spacing:-.04em;white-space:nowrap;
+  }
+  .author .wrap-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:48px;align-items:start}
+  .author-name{font-family:var(--sans);font-weight:600;font-size:clamp(30px,4vw,48px);letter-spacing:-.02em;line-height:1;color:#D9D9D9;margin-bottom:10px}
+  .author-role{font-family:var(--sans);font-weight:600;font-size:24px;line-height:1.1;color:#D9D9D7;margin-bottom:28px}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  .stat-card{background:var(--cream);border-radius:16px;padding:18px 24px;display:flex;flex-direction:column;gap:7px}
+  .stat-card b{
+    font-family:var(--sans);font-weight:600;font-size:20px;line-height:1.1;color:var(--gold);
+    padding-bottom:8px;border-bottom:1px solid rgba(54,66,89,.2);width:100%;
+  }
+  .stat-card span{display:block;font-size:14px;color:var(--navy-text);font-weight:700;line-height:1.25;margin-bottom:0}
+  .stat-card small{font-size:14px;color:var(--navy-text);line-height:1.25;font-weight:400}
+  .stat-card.icon-card{position:relative}
+  .stat-card.icon-card .picto{
+    width:44px;height:44px;border-radius:999px;background:var(--navy-text);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .stat-card.icon-card .picto img{width:20px;height:20px}
+  .stat-card.icon-card .book-cover{
+    position:absolute;right:14px;bottom:4px;width:94px;border-radius:6px;
+    transform:rotate(7deg);filter:drop-shadow(0 6px 8px rgba(0,0,0,.24));
+  }
+  .stat-card.book-card{padding-right:118px}
+  .press-block{
+    background:var(--cream);border-top:5px solid var(--gold);border-radius:15px;
+    padding:30px;display:flex;flex-direction:column;gap:15px;
+  }
+  .press-block b{
+    color:var(--navy-text);font-family:var(--sans);font-weight:600;font-size:24px;line-height:1;
+    padding-bottom:15px;border-bottom:1px solid rgba(54,66,89,.2);display:block;
+  }
+  .press-block .press-text{font-size:16px;line-height:1.3;color:var(--navy-text);font-weight:400}
+  .author-photo{position:relative;border-radius:20px;overflow:hidden;margin-bottom:20px;background:linear-gradient(135deg,#B5B6B6 0%,#8C8C8C 100%)}
+  .author-photo img{position:relative;z-index:1;width:100%;transform:scale(1.6);transform-origin:center top}
+  @media (min-width:861px){.author .wrap-grid > div:last-child{transform:translateY(8px)}}
+  .mission-card{background:var(--navy-card);border-radius:20px;padding:30px 40px;display:flex;flex-direction:column;gap:15px}
+  .mission-card h4{
+    font-family:var(--sans);font-weight:600;font-size:clamp(32px,3vw,48px);line-height:1.1;
+    color:rgba(217,217,215,.4);padding-bottom:15px;border-bottom:1px solid rgba(217,217,215,.2);
+  }
+  .mission-card p{font-size:16px;line-height:1.3;color:#D9D9D7}
+  @media (max-width:860px){
+    .author .wrap-grid{grid-template-columns:1fr}
+    .stat-grid{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:560px){
+    .stat-grid{grid-template-columns:1fr}
+  }
+  .author-mobile-top{display:none}
+  @media (max-width:860px){
+    .author-head{text-align:center;margin-bottom:24px}
+    .author h2{font-size:clamp(32px,9vw,44px);white-space:normal;line-height:1.05;text-align:center}
+    .author-mobile-top{display:block;margin-bottom:24px}
+    .author-mobile-row{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;margin-bottom:24px}
+    .author-photo-sm{
+      width:230px;height:230px;border-radius:28px;overflow:hidden;flex:none;margin:0 auto;
+      background:linear-gradient(135deg,#B5B6B6 0%,#8C8C8C 100%);
+    }
+    .author-photo-sm img{width:100%;height:100%;object-fit:cover;object-position:top center;transform:scale(1.6) translateY(-10%);transform-origin:center top}
+    .author-mobile-top .author-name{font-size:clamp(24px,6vw,30px);margin-bottom:6px}
+    .author-mobile-top .author-role{font-size:16px;margin-bottom:0}
+    .author-mobile-top .mission-card{padding:20px 24px}
+    .author-mobile-top .mission-card h4{font-size:clamp(20px,5vw,26px) !important;padding-bottom:10px}
+    .author-desktop-only{display:none}
+  }
+
+  /* ============ PRESS ROW ============ */
+  .press-row{background:#D9D9D9;padding:24px 0}
+  .press-row .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+  .press-logo{height:82px;padding:18px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center}
+  .press-logo img{max-width:100%;max-height:42px;width:auto;height:auto;object-fit:contain}
+  @media (max-width:860px){
+    .press-row{padding:10px 0 !important}
+    .press-row .wrap{grid-template-columns:repeat(5,1fr) !important;gap:6px !important;padding:0 4px !important}
+    .press-logo{height:46px;padding:6px;border-radius:8px}
+    .press-logo img{max-height:22px}
+  }
+
+  /* ============ REPEATED OFFER (dark) ============ */
+  .offer{
+    min-height:700px;padding:clamp(64px,7vw,96px) 0;
+    background-color:#171C25;
+    position:relative;overflow:hidden;
+  }
+  .offer::after{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:url('assets/offer-books-transparent.png') calc(100% + 300px) calc(50% + clamp(38px,5vw,110px))/clamp(1180px,92vw,1800px) auto no-repeat;
+  }
+  .offer .wrap{display:block;position:relative;z-index:1}
+  .offer .wrap > div:first-child{max-width:620px}
+  .offer-top{display:flex;align-items:center;gap:24px;margin-bottom:30px;flex-wrap:nowrap;width:720px}
+  .offer h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,7vw,80px);color:var(--gold);text-transform:uppercase;line-height:1;letter-spacing:-.04em;margin-bottom:0}
+  .offer-badge{
+    background:var(--cream);border-top:5px solid var(--gold);
+    border-radius:15px;padding:20px 24px;max-width:290px;flex:none;
+    box-shadow:0 10px 20px rgba(71,72,97,.05);
+  }
+  .offer-badge p{font-size:15px;line-height:1.35;color:var(--navy-text)}
+  .offer-badge b{font-weight:700}
+  .offer-price-label{display:inline-block;vertical-align:baseline;font-size:20px;line-height:1;color:#D9D9D7;margin:0 56px 0 0}
+  .offer .price-row{display:inline-flex;align-items:baseline;gap:18px;vertical-align:baseline;line-height:1;margin:0;white-space:nowrap}
+  .offer .price-old{
+    background:var(--navy-card);color:rgba(217,217,215,.4);font-style:italic;
+    font-size:20px;padding:10px 20px;border-radius:20px;text-decoration:line-through;
+  }
+  .offer .price-new{
+    font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:42px;line-height:1;letter-spacing:-.04em;color:#D9D9D7;
+  }
+  .offer .price-note{margin-bottom:30px}
+  .offer-feats{display:grid}
+  .offer-feats li{
+    position:relative;
+    display:flex;flex-direction:column;gap:10px;font-size:16px;line-height:1.3;color:#D9D9D9;
+    border:1px solid rgba(217,217,217,.2);border-radius:15px;padding:22px 20px 18px;
+  }
+  .offer-feats li::before{
+    content:'';
+    position:absolute;top:-10px;left:18px;
+    width:20px;height:20px;
+    background:url('assets/icon-star.svg') center/contain no-repeat;
+    border:none;border-radius:0;display:block;
+  }
+  .author-chip{
+    display:flex;align-items:center;gap:40px;background:var(--navy-card);border-radius:15px;
+    padding:20px 30px;margin-bottom:28px;
+  }
+  .offer .author-chip{display:flex}
+  .offer .author-chip{margin-top:24px}
+  .author-chip .av{width:60px;height:60px;border-radius:999px;object-fit:cover;flex:none}
+  .author-chip span{font-size:16px;font-weight:700;color:#D9D9D9}
+  .offer-inline-img{display:none}
+  @media (max-width:900px){
+    .offer{min-height:0}
+    .offer::after{display:none}
+    .offer .wrap > div:first-child{max-width:100%}
+    .offer-top{width:auto;flex-wrap:wrap;flex-direction:column;align-items:flex-start}
+    .offer-inline-img{display:block;margin:0 !important;width:100%;height:80vw;overflow:hidden;position:relative}
+    .offer-inline-img img{width:210% !important;max-width:none !important;height:auto !important;display:block;margin-left:-52% !important;margin-top:-8% !important;filter:drop-shadow(0 12px 30px rgba(0,0,0,.5))}
+    .offer .price-row{margin-left:0}
+  }
+  @media (min-width:901px) and (max-width:1500px){
+    .offer .wrap > div:first-child{max-width:680px}
+    .offer::after{background-position:calc(100% + 470px) calc(50% + clamp(28px,4vw,62px));background-size:clamp(1150px,104vw,1580px) auto}
+  }
+  @media (max-width:560px){
+    .offer{padding:48px 0}
+    .offer::after{background-position:130% 6%;background-size:480px auto;opacity:.22}
+    .offer-feats{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .offer-feats li{padding:20px 14px 14px;font-size:13.5px}
+    .offer h2{max-width:320px}
+  }
+
+  /* ============ IMAGINE YOURSELF ============ */
+  .imagine{padding:100px 0;overflow:hidden}
+  .imagine .wrap{position:relative}
+  .imagine-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-bottom:80px}
+  .imagine h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,4.6vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:72px;color:var(--navy-text)}
+  .imagine h2 em{color:var(--gold)}
+  .imagine-list{display:flex;flex-direction:column;gap:13px;margin-bottom:20px}
+  .imagine-list li{display:flex;gap:15px;font-size:16px;line-height:1.3;align-items:center;color:var(--navy-text)}
+  .imagine-list .ico{
+    flex:none;width:24px;height:24px;
+    background-image:var(--mask);background-position:center;background-size:contain;background-repeat:no-repeat;
+  }
+  .imagine-callout{background:#D8D8C0;border-radius:15px;padding:20px 30px;font-size:20px;line-height:1.3;color:#0E0E11}
+  .imagine-callout b{font-weight:700}
+  .imagine-media{
+    --bleed:calc((100vw - min(1200px, 100vw)) / 2 + 24px);
+    margin-left:calc(-1 * var(--bleed));
+    width:calc(100% + var(--bleed));
+  }
+  .imagine-media img{width:100%;display:block;min-height:340px;object-fit:cover}
+  .imagine-caption{
+    position:absolute;left:calc(50% - 134px);right:0;bottom:60px;background:#fff;
+    border-radius:0;padding:30px 40px;font-family:var(--serif);
+    font-size:clamp(18px,1.8vw,26px);line-height:1.1;letter-spacing:-.02em;color:var(--navy-text);
+    box-shadow:0 20px 50px rgba(0,0,0,.12);
+  }
+  .imagine-caption .accent{font-weight:400;font-style:italic;color:var(--gold)}
+  .imagine-clip{position:absolute;top:-30px;right:36px;width:34px;height:auto;z-index:2}
+  @media (max-width:860px){
+    .imagine{padding:40px 0 0 !important;padding-bottom:0 !important;background:var(--cream) !important}
+    .imagine-grid{grid-template-columns:1fr;margin-bottom:0;display:flex;flex-direction:column}
+    .imagine .wrap{display:block}
+    .imagine-grid > div:first-child{display:contents}
+    .imagine-grid > div:first-child h2{order:1;margin-bottom:14px !important}
+    .imagine-grid > div:nth-child(2){order:2;margin-bottom:0 !important}
+    .imagine-grid > div:first-child .imagine-media{
+      order:3;
+      position:relative;
+      margin-top:16px;
+      background:#191C24 !important;
+      width:100vw !important;
+      margin-left:calc(50% - 50vw) !important;
+      margin-right:calc(50% - 50vw) !important;
+    }
+    .imagine-grid > div:first-child .imagine-media img{
+      width:100% !important;
+      margin-left:0 !important;
+      margin-right:0 !important;
+    }
+    .imagine-list{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin-bottom:16px}
+    .imagine-list li{flex-direction:column;align-items:flex-start;gap:6px;font-size:14px}
+    .imagine-callout{font-size:14.5px;padding:14px 18px;margin-top:28px}
+    .imagine-caption{
+      position:relative !important;
+      order:4 !important;
+      margin:-56px 18px 0 !important;
+      right:auto !important;left:auto !important;bottom:auto !important;
+      border-radius:15px;z-index:2;box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+    .imagine-clip{display:block;top:-22px;right:24px;width:26px}
+  }
+
+  /* ============ FINAL CTA (dark) ============ */
+  .final-cta{padding:110px 0 100px;background:#171C25;overflow:hidden}
+  .final-cta .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .final-cta h2{font-size:clamp(30px,3.6vw,44px);text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  .final-cta .card{margin-bottom:26px;font-size:15px;line-height:1.6}
+  .final-cta .price-note{margin-bottom:30px}
+  .final-cta-media{overflow:visible}
+  .final-cta-media img{width:220%;max-width:none;transform:translateX(-50%)}
+  @media (max-width:900px){
+    .final-cta{padding:70px 0 !important;position:relative}
+    .final-cta .wrap{display:block;position:relative;z-index:2}
+    .final-cta h2{font-size:clamp(38px,5.2vw,56px);margin-bottom:0;max-width:220px}
+    .final-cta .card:first-of-type{background:none !important;border:none !important;padding:0 !important;box-shadow:none !important;margin-top:36px !important;margin-bottom:32px !important;font-size:16px;line-height:1.45;color:var(--white);font-weight:400}
+    .final-cta .card:nth-of-type(2){background:var(--navy-card) !important;border:1px solid rgba(255,255,255,.08) !important;border-radius:16px !important;padding:20px 22px !important;margin-bottom:20px;font-size:15px;line-height:1.55;color:var(--white)}
+    .final-cta-media{
+      position:absolute;right:-110px;top:-65px;z-index:1;
+      width:360px;pointer-events:none;opacity:0.75;overflow:visible;
+    }
+    .final-cta-media img{width:100%;max-width:none;height:auto;display:block;filter:drop-shadow(-10px 20px 40px rgba(0,0,0,.7));transform:none}
+  }
+
+  /* ============ FAQ ============ */
+  .faq{padding:90px 0 110px}
+  .faq h2{font-size:clamp(28px,3vw,36px);margin-bottom:36px}
+  .faq-item{border-bottom:1px solid rgba(54,66,89,.15)}
+  .faq-item:first-child{border-top:1px solid rgba(54,66,89,.15)}
+  .faq-q{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+    background:none;border:none;text-align:left;cursor:pointer;
+    padding:22px 4px;font-family:var(--sans);font-size:16px;font-weight:600;color:var(--navy-text);
+  }
+  .faq-q img{width:15px;height:15px;flex:none;transition:transform .2s ease}
+  .faq-item[open] .faq-q img{transform:rotate(45deg)}
+  .faq-a{padding:0 4px 22px;font-size:14.5px;line-height:1.6;color:var(--muted-light);max-width:760px}
+  .faq-item summary{list-style:none}
+  .faq-item summary::-webkit-details-marker{display:none}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--navy);padding:56px 0 40px;border-top:1px solid rgba(255,255,255,.08)}
+  .footer-brand-label{font-family:var(--sans);font-weight:700;font-size:20px;color:#D9D9D7;margin-bottom:6px}
+  .footer-brand-name{font-family:var(--sans);font-weight:500;font-size:16px;color:var(--gold);margin-bottom:32px}
+  .footer-row{display:flex;justify-content:space-between;gap:32px;margin-bottom:26px}
+  .footer-field{max-width:400px}
+  .footer-field h5{font-size:14px;font-weight:400;color:rgba(217,217,215,.4);margin-bottom:2px}
+  .footer-field p{font-size:16px;color:#D9D9D7;line-height:1.3}
+  footer a{color:inherit}
+  .footer-social{display:flex;gap:24px}
+  .footer-social a{display:flex;align-items:center;gap:10px;color:#D9D9D7;font-size:16px}
+  .footer-social img{width:30px;height:30px}
+  .footer-bottom{
+    display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    padding-top:24px;margin-top:24px;border-top:1px solid rgba(255,255,255,.08);
+    font-size:14px;line-height:1.3;color:rgba(217,217,215,.4);
+  }
+  .footer-bottom a{text-decoration:none}
+  .footer-bottom a:hover{text-decoration:underline;text-underline-offset:2px}
+  .footer-bottom > div:last-child{text-align:right}
+  .footer-offerta{color:rgba(255,0,0,.4)}
+  @media (max-width:760px){
+    .footer-row{flex-direction:column;gap:16px;margin-bottom:20px}
+    .footer-field{max-width:none}
+    .footer-social{justify-content:flex-start}
+    .footer-bottom{flex-direction:column;gap:10px}
+    .footer-bottom > div:last-child{text-align:left}
+  }
+
+  /* ============ GENERIC RESPONSIVE ============ */
+  @media (max-width:900px){
+    .hero .wrap, .pain .wrap, .why .wrap, .yeartool .wrap, .offer .wrap,
+    .imagine .wrap, .final-cta .wrap, .author .wrap-grid{
+      grid-template-columns:1fr !important;
+    }
+    .hero-content{padding:40px 0}
+    section, .ogr{padding-top:40px !important;padding-bottom:40px !important}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 18px}
+  }
+
+  /* Offer cards intentionally use flex-wrap: two cards per normal desktop row. */
+  .offer-feats{
+    display:flex !important;
+    flex-flow:row wrap !important;
+    gap:15px;
+  }
+  .offer-feats li{
+    flex:1 1 calc(50% - 8px);
+    min-width:280px;
+  }
+  .offer ul.offer-feats > li{
+    flex:none !important;
+    width:calc((100% - 15px) / 2) !important;
+    min-width:0 !important;
+  }
+  @media (max-width:900px){
+    .offer-feats li{flex:0 0 calc(50% - 8px);min-width:0}
+  }
+  @media (max-width:600px){
+    .offer ul.offer-feats > li{width:100% !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11.5" cy="12" r="9" stroke="#A9A975" stroke-width="1.6"/>
+        <circle cx="20.5" cy="12" r="2.2" fill="#A9A975"/>
+      </svg>
+      <span>Дневник Богатства</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#about">О дневнике</a>
+      <a href="#inside">Содержание</a>
+      <a href="#author">Отзывы</a>
+      <a href="#faq">Доставка</a>
+    </nav>
+    <button type="button" class="btn header-cta" onclick="openOrderModal()">Оформить предзаказ</button>
+    <button class="menu-burger" aria-label="Меню" type="button"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero dark">
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="hero-top-row">
+        <div class="hero-text-col">
+          <h1>Дневник<br>Богатства</h1>
+          <p class="hero-sub">Ваш ежедневный помощник для работы с деньгами</p>
+        </div>
+        <div class="hero-book-col">
+          <img src="assets/offer-diary-transparent.png" alt="Дневник Богатства" loading="eager">
+        </div>
+      </div>
+      <div class="card">
+        <p><b>Всего <span class="accent" style="font-style:normal">15 минут в день</span></b>, чтобы перестать принимать финансовые решения на автомате, выстроить полезные привычки и шаг за шагом двигаться к своим целям</p>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Стоимость<br>по предзаказу:</span>
+        <span class="price-old">3000 руб.</span>
+        <span class="price-new">2500 руб.</span>
+      </div>
+      <p class="price-note">Предложение действительно до 6 сентября 2026 года</p>
+      <button type="button" class="btn hero-btn" onclick="openOrderModal()">Оформить предзаказ →</button>
+    </div>
+    <div class="hero-media">
+      <img src="assets/hero-bg.jpg" alt="Дневник Богатства — закрытая обложка с золотым тиснением и ручка" loading="eager">
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN CHECKLIST ============ -->
+<section class="pain light">
+  <div class="wrap">
+    <div>
+      <h2>Вы много работаете.<br>Но чувствуете ли вы <em>уверенность</em> в своих финансах?</h2>
+      <p class="pain-sub">Вам знакомы эти мысли?</p>
+      <div class="pain-grid">
+        <div class="pain-card"><span class="dot">✓</span>Я вроде бы зарабатываю, но деньги постоянно куда-то исчезают</div>
+        <div class="pain-card"><span class="dot">✓</span>Не понимаю, сколько на самом деле трачу каждый месяц</div>
+        <div class="pain-card"><span class="dot">✓</span>Постоянно откладываю накопления на потом</div>
+        <div class="pain-card"><span class="dot">✓</span>Мне тревожно думать о своём финансовом будущем</div>
+        <div class="pain-card"><span class="dot">✓</span>Каждый месяц обещаю себе начать контролировать финансы, но быстро бросаю</div>
+        <div class="pain-card"><span class="dot">✓</span>Хочу создать финансовую подушку, но всегда появляются срочные расходы</div>
+      </div>
+      <div class="pain-callout">Но проблема не в том, что вы недостаточно зарабатываете. А в том, что у большинства людей <b>нет системы</b> управления своими финансами</div>
+    </div>
+    <div class="pain-media">
+      <img src="assets/book.png" alt="Разворот дневника: планировщик «Неделя №1» с чек-листом привычек и трекером прогресса" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY / CONTROL ============ -->
+<section class="why light">
+  <div class="wrap">
+    <div>
+      <h2>Большинство людей теряют не деньги,<br>они теряют <span class="accent" style="color:var(--gold-dark)">контроль</span></h2>
+      <ul class="star-list">
+        <li>День за днём деньги расходуются привычным образом</li>
+        <li>Финансовые цели отходят на второй план</li>
+        <li>Накопления постоянно откладываются</li>
+        <li>А ощущение порядка так и не появляется</li>
+      </ul>
+      <div class="card"><b>Дневник возвращает внимание</b> к тому, что действительно влияет на результат — вашим ежедневным действиям</div>
+      <p class="why-quote">Потому что богатство начинается не с дохода. Оно начинается с ваших <span class="accent" style="color:var(--gold-dark)">ежедневных решений</span></p>
+    </div>
+    <div class="why-media">
+      <img src="assets/halfbook.png" alt="Разворот дневника с разделом «Финансовый хаос — дорогое удовольствие»" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ YEAR TOOL ============ -->
+<section class="yeartool dark" id="about">
+  <div class="wrap">
+    <h2>Дневник Богатства</h2>
+    <div class="yeartool-content">
+      <h3>Это инструмент, с которым вы работаете <em>весь год</em></h3>
+      <div class="card">Это личное пространство, куда вы возвращаетесь каждый день, чтобы не терять из виду свои финансовые цели, замечать прогресс и постепенно менять привычки</div>
+      <p style="font-size:14px;color:var(--muted-dark);margin-bottom:14px">С помощью дневника вы сможете:</p>
+      <ul class="feature-list">
+        <li><span class="ico" style="--mask:url('assets/icon-chatsquare2.svg')"></span>Поставить финансовые цели и превратить их в понятный план действий</li>
+        <li><span class="ico" style="--mask:url('assets/icon-moneybag2.svg')"></span>Сформировать привычки, которые помогают создавать капитал</li>
+        <li><span class="ico" style="--mask:url('assets/icon-wallet.svg')"></span>Контролировать доходы, расходы, долги и накопления в одном месте</li>
+        <li><span class="ico" style="--mask:url('assets/icon-calendar.svg')"></span>Планировать каждую неделю по готовой системе</li>
+        <li><span class="ico" style="--mask:url('assets/icon-cup.svg')"></span>Видеть свой финансовый прогресс и замечать реальные изменения</li>
+      </ul>
+      <p class="yeartool-quote">«Каждая заполненная страница — это ещё один шаг к финансовой уверенности и жизни, в которой деньги работают на ваши цели»</p>
+      <button type="button" class="btn" onclick="openOrderModal()">Оформить предзаказ →</button>
+    </div>
+    <div class="yeartool-media">
+      <img src="assets/finbook.png" alt="Разворот дневника: еженедельный финансовый план и трекер финансовых целей" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INSIDE ============ -->
+<section class="inside light" id="inside">
+  <div class="wrap">
+    <div class="inside-head">
+      <h2>Что находится внутри Дневника Богатства</h2>
+      <p>Каждая страница — это часть единой системы, которая помогает не терять фокус на своих финансовых целях в течение всего года</p>
+    </div>
+    <div class="inside-intro"><b>Внутри вы найдёте реальные рабочие инструменты,</b><br>которые сопровождают вас от первых целей до анализа достигнутых результатов</div>
+    <div class="inside-grid">
+      <div class="inside-card"><span class="dot"></span><b>Постановка финансовых целей</b><span>по методике SMART</span></div>
+      <div class="inside-card"><span class="dot"></span><b>Планирование</b><span>небольших ежедневных шагов</span></div>
+      <div class="inside-card"><span class="dot"></span><b>Учёт финансов</b><span>доходов, расходов, долгов, накоплений</span></div>
+      <div class="inside-card"><span class="dot"></span><b>Еженедельный анализ</b><span>финансовых решений</span></div>
+      <div class="inside-card"><span class="dot"></span><b>Трекеры привычек</b><span>и личного прогресса</span></div>
+      <div class="inside-card"><span class="dot"></span><b>Итоги, которые помогают увидеть</b><span>как меняются действия и результаты</span></div>
+    </div>
+    <div class="card">Все страницы построены так, чтобы вы не просто заполняли дневник, а постепенно <span class="accent" style="color:var(--gold-dark)">выстраивали новые</span> финансовые привычки</div>
+    <div class="inside-media"><img src="assets/inside-pages.png" alt="Подборка страниц Дневника Богатства" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ============ 5 STEPS ============ -->
+<section class="steps dark">
+  <div class="wrap">
+    <div class="steps-head">
+      <h2>Как Дневник Богатства помогает выстроить <em>правильные</em> отношения с деньгами</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><span class="step-num">Шаг 1</span><h4>Определите финансовую цель, к которой хотите прийти</h4><p>Это может быть подушка безопасности, закрытие долгов, накопления или крупная покупка. Главное — понимать, ради чего вы начинаете этот путь</p></div>
+      <div class="step-card"><span class="step-num">Шаг 2</span><h4>Разбейте цель на небольшие ежедневные действия</h4><p>Когда следующий шаг понятен, его проще сделать. Именно так большие цели превращаются в реальные результаты</p></div>
+      <div class="step-card"><span class="step-num">Шаг 3</span><h4>Возвращайтесь к дневнику каждую неделю</h4><p>Отмечайте, что получилось, анализируйте свои решения и не теряйте фокус на цели</p></div>
+      <div class="step-card"><span class="step-num">Шаг 4</span><h4>Регулярно подводите итоги</h4><p>Дневник помогает увидеть не только цифры, но и изменения в ваших привычках, дисциплине и отношении к деньгам</p></div>
+      <div class="step-card"><span class="step-num">Шаг 5</span><h4>Продолжайте двигаться вперёд</h4><p>Страница за страницей. Неделя за неделей. Именно регулярность превращает отдельные действия в устойчивые финансовые привычки</p></div>
+    </div>
+    <button type="button" class="btn steps-cta" onclick="openOrderModal()">Оформить предзаказ →</button>
+  </div>
+</section>
+
+<!-- ============ TODAY VS 365 ============ -->
+<section class="compare dark">
+  <div class="wrap">
+    <div class="compare-book">
+      <img src="assets/compare-book-cropped.png" alt="Разворот дневника: что меняется за 365 дней регулярной работы" loading="lazy">
+    </div>
+    <div class="compare-mobile">
+      <h3>Что меняется, когда дневник становится частью <em>вашей жизни</em></h3>
+      <p class="compare-label">Сегодня:</p>
+      <ul class="compare-list--bad">
+        <li><span class="x-badge">✕</span>Финансовые цели постоянно откладываются</li>
+        <li><span class="x-badge">✕</span>Деньги расходуются незаметно</li>
+        <li><span class="x-badge">✕</span>Накопления появляются от случая к случаю</li>
+        <li><span class="x-badge">✕</span>Сложно сохранять дисциплину надолго</li>
+        <li><span class="x-badge">✕</span>Кажется, что движения вперед нет</li>
+      </ul>
+      <div class="compare-year">
+        <h3 class="compare-365">365 дней</h3>
+        <p class="compare-label">Через год регулярной работы с дневником:</p>
+        <div class="compare-grid">
+          <div class="compare-card"><span class="check-badge">✓</span>Вы ясно понимаете, к каким финансовым целям идёте</div>
+          <div class="compare-card"><span class="check-badge">✓</span>Каждое решение становится более осознанным</div>
+          <div class="compare-card"><span class="check-badge">✓</span>Накопления перестают быть случайностью и становятся привычкой</div>
+          <div class="compare-card"><span class="check-badge">✓</span>Вы видите свой прогресс наглядно, на страницах дневника</div>
+          <div class="compare-card compare-card--full"><span class="check-badge">✓</span>Вместо ощущения хаоса появляется уверенность, потому что вы понимаете, что происходит с вашими финансами</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOR THOSE WHO WANT ============ -->
+<section class="wantfor light">
+  <div class="wantfor-media">
+    <img src="assets/lifestyle-desk.jpg" alt="Дневник Богатства на рабочем столе в спокойном интерьере" loading="lazy">
+  </div>
+  <div class="wrap">
+    <div class="wantfor-card">
+      <h2>Дневник создан для тех, <em>кто хочет</em></h2>
+      <ul class="want-list">
+        <li><span class="want-check"></span>Перестать откладывать финансовые цели «на потом»</li>
+        <li><span class="want-check"></span>Наконец выстроить регулярную привычку откладывать деньги</li>
+        <li><span class="want-check"></span>Видеть, куда вы движетесь и каких результатов уже достигли</li>
+        <li><span class="want-check"></span>Принимать финансовые решения более осознанно</li>
+        <li><span class="want-check"></span>Сохранять дисциплину даже тогда, когда мотивация снижается</li>
+        <li><span class="want-check"></span>Шаг за шагом менять свои финансовые привычки</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTHOR ============ -->
+<section class="author dark" id="author">
+  <div class="wrap">
+    <div class="author-head">
+      <h2>Автор Дневника</h2>
+    </div>
+    <div class="author-mobile-top">
+      <div class="author-mobile-row">
+        <div class="author-photo-sm"><img src="assets/author-photo-gradient.png" alt="Татьяна Волкова — автор Дневника Богатства"></div>
+        <div>
+          <div class="author-name">Татьяна Волкова</div>
+          <p class="author-role">Эксперт по созданию личного капитала</p>
+        </div>
+      </div>
+      <div class="mission-card">
+        <h4>Миссия</h4>
+        <p>Сделать сложные финансовые инструменты доступными и понятными для каждого</p>
+      </div>
+    </div>
+    <div class="wrap-grid">
+      <div>
+        <div class="author-name author-desktop-only">Татьяна Волкова</div>
+        <p class="author-role author-desktop-only">Эксперт по созданию личного капитала</p>
+        <div class="stat-grid">
+          <div class="stat-card"><b>13+ лет</b><span>Финансовое образование</span><small>13+ лет занимается финансовым образованием населения</small></div>
+          <div class="stat-card"><b>70 000+</b><span>Личный капитал</span><small>70 000+ выпускников</small></div>
+          <div class="stat-card"><b>20+ источников</b><span>Пассивный доход</span><small>Система регулярных денежных поступлений</small></div>
+          <div class="stat-card"><b>2 500+</b><span>Публикации в СМИ</span><small>В 2026 г. вышло 2 500+ материалов в СМИ с комментариями Татьяны</small></div>
+          <div class="stat-card icon-card"><div class="picto"><img src="assets/icon-briefcase.svg" alt=""></div><span>Бизнес и инвестиции</span><small>Серийный предприниматель, инвестор в ценные бумаги, недвижимость и криптовалюту</small></div>
+          <div class="stat-card icon-card book-card"><div class="picto"><img src="assets/icon-book.svg" alt=""></div><span>Автор бестселлера</span><small>«5 капиталов»</small><img class="book-cover" src="assets/book-cover-final.png" alt="Обложка книги «5 капиталов»"></div>
+        </div>
+        <div class="press-block"><b>Федеральные СМИ</b><span class="press-text">Эксперт федеральных СМИ — Первый канал, Москва24, РБК, «Известия», «Коммерсантъ», Газета.Ru, Lenta.Ru, Российская газета, Аргументы и факты, РИА Новости и др.</span></div>
+      </div>
+      <div class="author-desktop-only">
+        <div class="author-photo"><img src="assets/author-photo-gradient.png" alt="Татьяна Волкова — автор Дневника Богатства" loading="lazy"></div>
+        <div class="mission-card">
+          <h4>Миссия</h4>
+          <p>Сделать сложные финансовые инструменты доступными и понятными для каждого</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRESS ROW ============ -->
+<section class="press-row">
+  <div class="wrap">
+    <div class="press-logo"><img src="assets/press-1tv.png" alt="Первый канал" loading="lazy"></div>
+    <div class="press-logo"><img src="assets/press-moscow24.png" alt="Москва24" loading="lazy"></div>
+    <div class="press-logo"><img src="assets/press-rbc.png" alt="РБК" loading="lazy"></div>
+    <div class="press-logo"><img src="assets/press-ria.png" alt="РИА Новости" loading="lazy"></div>
+    <div class="press-logo"><img src="assets/press-kommersant.png" alt="Коммерсантъ" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ============ REPEAT OFFER ============ -->
+<section class="offer dark" id="order">
+  <div class="wrap">
+    <div>
+      <div class="offer-top">
+        <h2>Дневник<br>Богатства</h2>
+        <div class="offer-inline-img">
+          <img src="assets/offer-books-transparent.png" alt="Дневник Богатства" loading="lazy">
+        </div>
+        <div class="offer-badge">
+          <p>Печатный дневник, рассчитанный <b>на 365 дней</b> последовательной работы</p>
+        </div>
+      </div>
+      <p class="offer-price-label">Стоимость по предзаказу:</p>
+      <div class="price-row">
+        <span class="price-old">3000 руб.</span>
+        <span class="price-new">2500 руб.</span>
+      </div>
+      <p class="price-note">Предложение действительно до 6 сентября 2026 года</p>
+      <ul class="offer-feats">
+        <li><b>Постановка финансовых целей</b>и планирование пути к ним</li>
+        <li><b>Страницы для работы с доходами,</b>расходами, долгами и накоплениями</li>
+        <li><b>Еженедельные вопросы и анализ,</b>помогающие не сбиться с курса</li>
+        <li><b>Трекеры привычек</b>и прогресса</li>
+      </ul>
+      <div class="author-chip">
+        <img class="av" src="assets/author-avatar-round.png" alt="">
+        <span>Авторская методика Татьяны Волковой</span>
+      </div>
+      <button type="button" class="btn" onclick="openOrderModal()">Оформить предзаказ →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IMAGINE YOURSELF ============ -->
+<section class="imagine light">
+  <div class="wrap">
+    <div class="imagine-grid">
+      <div>
+        <h2>Представьте себя <em>через год</em></h2>
+        <div class="imagine-media">
+          <img src="assets/imagine-photo.jpg" alt="Проверка финансового прогресса — через год работы с дневником" loading="lazy">
+        </div>
+      </div>
+      <div>
+        <ul class="imagine-list">
+          <li><span class="ico" style="--mask:url('assets/icon-chatsquare.svg')"></span>Вы лучше понимаете свои финансовые решения</li>
+          <li><span class="ico" style="--mask:url('assets/icon-moneybag.svg')"></span>Регулярно создаёте накопления</li>
+          <li><span class="ico" style="--mask:url('assets/icon-cup.svg')"></span>Видите свой прогресс не по ощущениям, а на страницах дневника</li>
+          <li><span class="ico" style="--mask:url('assets/icon-bolt.svg')"></span>Увереннее принимаете решения</li>
+        </ul>
+        <div class="imagine-callout"><b>И самое главное —</b> теперь вы управляете своими финансами, а не они вами</div>
+      </div>
+      <div class="imagine-caption">
+        Если каждый день уделять своим финансам <span class="accent">всего несколько минут</span> вместе с дневником, через год вы сможете увидеть, насколько далеко продвинулись
+        <img class="imagine-clip" src="assets/imagine-paperclip.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta dark">
+  <div class="wrap">
+    <div>
+      <h2>Дневник Богатства</h2>
+      <div class="card">Все большие финансовые изменения начинаются с одного решения</div>
+      <div class="card" style="margin-top:-8px">Начните уже сегодня, чтобы через год увидеть результат своих ежедневных действий</div>
+      <div class="price-row" style="margin-top:26px">
+        <span class="price-label">Стоимость<br>по предзаказу:</span>
+        <span class="price-new">2500 руб.</span>
+      </div>
+      <p class="price-note">До 6 сентября 2026 года. Далее — 3 000 руб.</p>
+      <button type="button" class="btn" onclick="openOrderModal()">Оформить предзаказ →</button>
+    </div>
+    <div class="final-cta-media">
+      <img src="assets/offer-diary-transparent.png?v=1" alt="Дневник Богатства с ручкой" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq light" id="faq">
+  <div class="wrap">
+    <h2>Ответы на вопросы</h2>
+
+    <details class="faq-item" open>
+      <summary class="faq-q">Это электронный дневник или печатный?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">Это печатный дневник, который вы получите в физическом виде. Он создан для ежедневных записей и рассчитан на 365 дней работы с финансовыми целями.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Нужно ли иметь знания по финансовой грамотности?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">Нет, дневник построен так, чтобы им мог пользоваться каждый — без специальной подготовки. Все разделы сопровождаются понятными вопросами и подсказками.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Сколько времени занимает заполнение?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">В среднем 10–15 минут в день на ежедневные отметки и 20–30 минут раз в неделю на подведение итогов недели.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Когда будет отправка по предзаказу?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">Даты отправки предзаказов будут сообщены дополнительно на почту, указанную при оформлении заказа.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Какими способами осуществляется доставка?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">Доставка осуществляется курьером и почтой России по всей территории России.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Как можно отследить отправление?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">После отправки вы получите трек-номер на почту, указанную при оформлении заказа.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Можно ли подарить дневник?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">Да, при оформлении заказа вы можете указать другой адрес и данные получателя.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Можно ли заказать доставку в другую страну?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a">Для уточнения условий международной доставки свяжитесь с нами в Telegram или WhatsApp.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <p class="footer-brand-label">Продавец / Изготовитель</p>
+    <p class="footer-brand-name">ООО «СИНТЕРА»</p>
+
+    <div class="footer-row">
+      <div class="footer-field">
+        <h5>ИНН</h5>
+        <p>9713030131</p>
+      </div>
+      <div class="footer-field">
+        <h5>Телефон:</h5>
+        <p>+7 (965) 136-63-52</p>
+      </div>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-field">
+        <h5>Юридический адрес:</h5>
+        <p>127238, г. Москва, Тимирязевский р-н, Локомотивный проезд, д. 21, стр. 5, помещ. 411</p>
+      </div>
+      <div class="footer-field">
+        <h5>Электронная почта:</h5>
+        <p>sluzhba_zaboty@plus-fin.ru</p>
+      </div>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-field">
+        <h5>Место изготовления товара:</h5>
+        <p>г. Москва</p>
+      </div>
+      <div class="footer-social">
+        <a href="#"><img src="assets/icon-telegram.svg" alt="">Telegram</a>
+        <a href="#"><img src="assets/icon-whatsapp.svg" alt="">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <a href="#">Согласие на обработку персональных данных</a><br>
+        <a href="#">Согласие на получение рекламы</a>
+      </div>
+      <div>
+        <a href="#">Политика обработки персональных данных ООО «СИНТЕРА»</a><br>
+        <a href="#" class="footer-offerta">Оферта*</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ ORDER MODAL (GetCourse widget) ============ -->
+<div id="order-modal" class="order-modal">
+  <div class="order-modal-backdrop" onclick="closeOrderModal()"></div>
+  <div class="order-modal-content">
+    <button type="button" class="order-modal-close" onclick="closeOrderModal()" aria-label="Закрыть">&times;</button>
+    <div id="order-widget-container">
+      <script id="b1a9297f094127c958787786950408f062216835" src="https://fincontour.ru/pl/lite/widget/script?id=1639026"></script>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Only one FAQ item open at a time
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.addEventListener('toggle', function(){
+      if(item.open){
+        document.querySelectorAll('.faq-item').forEach(function(other){
+          if(other !== item) other.open = false;
+        });
+      }
+    });
+  });
+
+  // Order modal (GetCourse preorder widget)
+  function openOrderModal(){
+    document.getElementById('order-modal').classList.add('active');
+    document.body.classList.add('modal-open');
+  }
+  function closeOrderModal(){
+    document.getElementById('order-modal').classList.remove('active');
+    document.body.classList.remove('modal-open');
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeOrderModal();
+  });
+</script>
+
+</body>
+</html>

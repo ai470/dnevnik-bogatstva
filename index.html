@@ -728,7 +728,6 @@
       order:3;
       position:relative;
       margin-top:16px;
-      background:#191C24 !important;
       width:100vw !important;
       margin-left:calc(50% - 50vw) !important;
       margin-right:calc(50% - 50vw) !important;
@@ -741,10 +740,20 @@
     .imagine-list{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin-bottom:16px}
     .imagine-list li{flex-direction:column;align-items:flex-start;gap:6px;font-size:14px}
     .imagine-callout{font-size:14.5px;padding:14px 18px;margin-top:28px}
+    .imagine-caption-wrap{
+      order:4 !important;
+      background:#191C24 !important;
+      width:100vw !important;
+      margin-left:calc(50% - 50vw) !important;
+      margin-right:calc(50% - 50vw) !important;
+      margin-top:-60px !important;
+      padding:0 18px 40px !important;
+      position:relative !important;
+      z-index:2 !important;
+    }
     .imagine-caption{
       position:relative !important;
-      order:4 !important;
-      margin:-56px 18px 0 !important;
+      margin:0 !important;
       right:auto !important;left:auto !important;bottom:auto !important;
       border-radius:15px;z-index:2;box-shadow:0 12px 30px rgba(0,0,0,.18);
     }
@@ -1181,9 +1190,11 @@
         </ul>
         <div class="imagine-callout"><b>И самое главное —</b> теперь вы управляете своими финансами, а не они вами</div>
       </div>
-      <div class="imagine-caption">
-        Если каждый день уделять своим финансам <span class="accent">всего несколько минут</span> вместе с дневником, через год вы сможете увидеть, насколько далеко продвинулись
-        <img class="imagine-clip" src="assets/imagine-paperclip.png" alt="">
+      <div class="imagine-caption-wrap">
+        <div class="imagine-caption">
+          Если каждый день уделять своим финансам <span class="accent">всего несколько минут</span> вместе с дневником, через год вы сможете увидеть, насколько далеко продвинулись
+          <img class="imagine-clip" src="assets/imagine-paperclip.png" alt="">
+        </div>
       </div>
     </div>
   </div>

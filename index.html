@@ -783,17 +783,17 @@
 
   /* ============ FAQ ============ */
   .faq{padding:90px 0 110px}
-  .faq h2{font-size:clamp(28px,3vw,36px);margin-bottom:36px}
+  .faq h2{font-size:clamp(32px,5.4vw,64px);letter-spacing:-.02em;margin-bottom:36px}
   .faq-item{border-bottom:1px solid rgba(54,66,89,.15);transition:background-color .25s ease}
   .faq-item:first-child{border-top:1px solid rgba(54,66,89,.15)}
   .faq-q{
-    width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+    width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;
     background:none;border:none;text-align:left;cursor:pointer;
-    padding:22px 4px;font-family:var(--sans);font-size:16px;font-weight:600;color:var(--navy-text);
+    padding:26px 4px;font-family:var(--sans);font-size:clamp(17px,1.8vw,24px);font-weight:700;color:var(--navy-text);
     transition:color .2s ease;
   }
   .faq-q:hover{color:var(--gold-dark)}
-  .faq-q img{width:15px;height:15px;flex:none;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+  .faq-q img{width:22px;height:22px;flex:none;margin-top:2px;transition:transform .35s cubic-bezier(.4,0,.2,1)}
   .faq-item[open] .faq-q img{transform:rotate(135deg)}
   /* Animate the accordion open/close via the CSS grid-rows trick — smooth
      height transition without JS measuring scrollHeight. Overrides the
@@ -801,10 +801,11 @@
   .faq-a{
     display:grid;grid-template-rows:0fr;
     transition:grid-template-rows .35s cubic-bezier(.4,0,.2,1), opacity .3s ease;
-    opacity:0;font-size:14.5px;line-height:1.6;color:var(--muted-light);max-width:760px;
+    opacity:0;font-size:clamp(15px,1.5vw,20px);line-height:1.3;color:var(--navy-text);max-width:815px;
   }
   .faq-item[open] .faq-a{grid-template-rows:1fr;opacity:1}
-  .faq-a-inner{overflow:hidden;padding:0 4px 22px}
+  .faq-a-inner{overflow:hidden;padding:0 4px 26px;display:flex;flex-direction:column;gap:10px}
+  .faq-accent{color:var(--gold-dark);font-weight:700}
   .faq-item summary{list-style:none}
   .faq-item summary::-webkit-details-marker{display:none}
 
@@ -1227,35 +1228,59 @@
 
     <details class="faq-item" open>
       <summary class="faq-q">Это электронный дневник или печатный?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">Это печатный дневник, который вы получите в физическом виде. Он создан для ежедневных записей и рассчитан на 365 дней работы с финансовыми целями.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>Это <span class="faq-accent">печатный дневник,</span> который вы получите в физическом виде. Он создан для ежедневных записей и рассчитан на 365 дней работы с финансовыми целями</p>
+      </div></div>
     </details>
     <details class="faq-item">
       <summary class="faq-q">Нужно ли иметь знания по финансовой грамотности?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">Нет, дневник построен так, чтобы им мог пользоваться каждый — без специальной подготовки. Все разделы сопровождаются понятными вопросами и подсказками.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>Нет. Дневник подходит как тем, кто только начинает разбираться в своих финансах, так и тем, кто уже ведет бюджет и хочет сделать работу с деньгами более системной</p>
+      </div></div>
     </details>
     <details class="faq-item">
       <summary class="faq-q">Сколько времени занимает заполнение?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">В среднем 10–15 минут в день на ежедневные отметки и 20–30 минут раз в неделю на подведение итогов недели.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>В среднем достаточно <span class="faq-accent">10–15 минут в день.</span> Главное — регулярность, а не количество времени</p>
+      </div></div>
     </details>
     <details class="faq-item">
       <summary class="faq-q">Когда будет отправка по предзаказу?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">Даты отправки предзаказов будут сообщены дополнительно на почту, указанную при оформлении заказа.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>Отправка дневников начнется с 6 сентября 2026 года.</p>
+        <p>Мы будем отправлять заказы транспортной компанией СДЭК в порядке очередности оформления предзаказов. После передачи посылки в службу доставки вы получите трек-номер для отслеживания</p>
+      </div></div>
     </details>
     <details class="faq-item">
       <summary class="faq-q">Какими способами осуществляется доставка?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">Доставка осуществляется курьером и почтой России по всей территории России.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>Мы отправляем заказы по всей России транспортной компанией <span class="faq-accent">СДЭК.</span></p>
+        <p>Доставка оплачивается <span class="faq-accent">получателем</span> по тарифам транспортной компании. После передачи заказа в СДЭК вы получите трек-номер для отслеживания отправления</p>
+      </div></div>
     </details>
     <details class="faq-item">
       <summary class="faq-q">Как можно отследить отправление?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">После отправки вы получите трек-номер на почту, указанную при оформлении заказа.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>После отправки вы получите трек-номер, по которому сможете отслеживать доставку заказа</p>
+      </div></div>
     </details>
     <details class="faq-item">
-      <summary class="faq-q">Можно ли подарить дневник?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">Да, при оформлении заказа вы можете указать другой адрес и данные получателя.</div></div>
+      <summary class="faq-q">Как происходит оплата?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>После оформления предзаказа вы получите ссылку для безналичной оплаты. После успешной оплаты автоматически формируется электронный кассовый чек, который будет отправлен на указанную вами электронную почту</p>
+      </div></div>
     </details>
     <details class="faq-item">
-      <summary class="faq-q">Можно ли заказать доставку в другую страну?<img src="assets/icon-plus.svg" alt=""></summary>
-      <div class="faq-a"><div class="faq-a-inner">Для уточнения условий международной доставки свяжитесь с нами в Telegram или WhatsApp.</div></div>
+      <summary class="faq-q">Где изготовлен дневник?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>Дневник изготавливается в г. Москва</p>
+      </div></div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Есть ли гарантийный срок?<img src="assets/icon-plus.svg" alt=""></summary>
+      <div class="faq-a"><div class="faq-a-inner">
+        <p>Гарантийный срок и срок годности на товар не устанавливаются в связи с характером товара</p>
+      </div></div>
     </details>
   </div>
 </section>

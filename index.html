@@ -767,7 +767,7 @@
   .final-cta .card{margin-bottom:26px;font-size:15px;line-height:1.6}
   .final-cta .price-note{margin-bottom:30px}
   .final-cta-media{overflow:visible}
-  .final-cta-media img{width:220%;max-width:none;transform:translateX(-50%)}
+  .final-cta-media img{width:220%;max-width:none;transform:translateX(-50%);pointer-events:none}
   @media (max-width:900px){
     .final-cta{padding:70px 0 !important;position:relative}
     .final-cta .wrap{display:block;position:relative;z-index:2}
@@ -1208,9 +1208,10 @@
       <div class="card" style="margin-top:-8px">Начните уже сегодня, чтобы через год увидеть результат своих ежедневных действий</div>
       <div class="price-row" style="margin-top:26px">
         <span class="price-label">Стоимость<br>по предзаказу:</span>
+        <span class="price-old">3000 руб.</span>
         <span class="price-new">2500 руб.</span>
       </div>
-      <p class="price-note">До 6 сентября 2026 года. Далее — 3 000 руб.</p>
+      <p class="price-note">Предложение действительно до 6 сентября 2026 года</p>
       <button type="button" class="btn" onclick="openOrderModal()">Оформить предзаказ →</button>
     </div>
     <div class="final-cta-media">
